@@ -28,6 +28,8 @@ def search(eintrag, testen, ergebnis = []):
 def search_document(eintrag, testen, ergebnis = []):
     pass
 
+#hallo André
+
 #%% 
 #tags which dont contain dsgvo
 p00_tag_list = [""]
