@@ -21,7 +21,7 @@ def analyse_xml(root):
     len_lxml = root.tag.rfind('}')+1
     
     tag_list = read_tags(root, len_lxml)
-    
+    pprint.pprint(tag_list)
     
    
        
