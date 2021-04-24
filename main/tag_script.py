@@ -21,7 +21,7 @@ def analyse_xml(root):
     
     len_lxml = root.tag.rfind('}')+1
     
-    tag_list = read_tags(root, len_lxml)
+    tag_list = read_tags(root, root, len_lxml)
     print("Ich bin die echte tag list", tag_list)
     
     
@@ -94,7 +94,7 @@ def search(p_list, tag, location, ergebnis = []):
 #     #['blubitem', 10]]
 #     return list_of_tags, parents
 
-def read_tags(Ebene, len_lxml, parents = [], list_of_tags = []):
+def read_tags(root, Ebene, len_lxml, parents = [], list_of_tags = []):
     for i in range(len(Ebene)): 
         tag = Ebene[i].tag[len_lxml:]   
         parents = parents[:] + [i]
@@ -102,7 +102,7 @@ def read_tags(Ebene, len_lxml, parents = [], list_of_tags = []):
         #('list_of_tags', list_of_tags)        #print(list_of_tags)
         if Ebene.getchildren()[i] != None:            #print(list_of_tags[-1][1])
             #print('parents: ', parents)
-            read_tags(Ebene.getchildren()[i], len_lxml, parents, list_of_tags)
+            read_tags(root, Ebene.getchildren()[i], len_lxml, parents, list_of_tags)
         #parents.pop(-1)
         if Ebene[i].getparent() == root:
             parents = []
@@ -193,7 +193,7 @@ if __name__ == "__main__":
     critical_tags_list = analyse_xml(root)
     
     pprint.pprint('--------------------------')
-    pprint.pprint(critical_tags_list) 
+    pprint.pprint(critical_tags_list)
     
     
     # anonymized_xml = yvesfunktion(critical_tags_list)

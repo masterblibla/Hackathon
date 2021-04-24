@@ -1,0 +1,23 @@
+23:45:37,984 anonymizingLogger INFO ('Current location starting from root going through the children', [0, 0, 0])
+23:45:37,984 anonymizingLogger INFO changed current text "blub1" of tag NullNullNull
+23:45:37,984 anonymizingLogger INFO into "anonymized text"
+23:45:37,984 anonymizingLogger INFO Anonymizing for tag NullNullNull completed.
+
+23:45:37,984 anonymizingLogger INFO ('Current location starting from root going through the children', [1, 0])
+23:47:21,817 anonymizingLogger INFO ('Current location starting from root going through the children', [0, 0, 0])
+23:47:21,817 anonymizingLogger INFO changed current text "blub1" of tag NullNullNull
+23:47:21,817 anonymizingLogger INFO into "anonymized text"
+23:47:21,817 anonymizingLogger INFO Anonymizing for tag NullNullNull completed.
+
+23:47:21,817 anonymizingLogger INFO ('Current location starting from root going through the children', [1, 0])
+23:47:21,817 anonymizingLogger INFO This tag does not contain text.
+23:47:58,884 anonymizingLogger INFO ('Current location starting from root going through the children', [0, 0, 0])
+23:47:58,884 anonymizingLogger INFO changed current text "blub1" of tag NullNullNull
+23:47:58,884 anonymizingLogger INFO into "anonymized text"
+23:47:58,884 anonymizingLogger INFO Anonymizing for tag NullNullNull completed.
+
+23:47:58,884 anonymizingLogger INFO ('Current location starting from root going through the children', [1, 0])
+23:47:58,884 anonymizingLogger INFO changed current text "item123" of tag EinsNull
+23:47:58,884 anonymizingLogger INFO into "anonymized text"
+23:47:58,884 anonymizingLogger INFO Anonymizing for tag EinsNull completed.
+
