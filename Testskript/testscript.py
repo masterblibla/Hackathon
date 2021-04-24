@@ -6,23 +6,13 @@ Created on Wed Apr 21 18:38:48 2021
 """
 import pprint 
 import xml.etree.ElementTree as ET
-from lxml import etree as le
+from lxml import etree
 
 def read_xml(path):
     
-    tree = le.parse(path)
+    tree = ET.parse(path)
     root = tree.getroot()
     
-    
-    
-    # # Remove namespace prefixes
-    # for elem in root.getiterator():
-    #     elem.tag = etree.QName(elem).localname
-    # # Remove unused namespace declarations
-    # etree.cleanup_namespaces(root)
-    
-    # print(etree.tostring(root).decode())
-
     return root
 
 def analyse_xml(root):
@@ -31,23 +21,22 @@ def analyse_xml(root):
     len_lxml = root.tag.rfind('}')+1
     
     tag_list = read_tags(root, len_lxml)
-    print('tag_list: ', tag_list)
+    pprint.pprint(tag_list)
     
-
-    
-    # tag_list = [      ["City", [1,8,8]]        ]
-    
-    
+   
+       
     critical_tags_list = []
-    
     for tag in tag_list:
-        critical_tag = search(p100_tag_list, tag[0], location = tag[1])
+        print(tag[0])
+        critical_tag = search(p100_tag_list, tag[0], location = tag[1], ergebnis = [])
+        if critical_tag != []:
+            critical_tags_list.append(critical_tag)
+            
         
-        critical_tags_list.append(critical_tag)
     return critical_tags_list
 
 
-def search(p_list, tag, location, ergebnis = [], parents = []):
+def search(p_list, tag, location, ergebnis = []):
     '''
     recursive in depth search of defined critical tags
 
@@ -72,13 +61,14 @@ def search(p_list, tag, location, ergebnis = [], parents = []):
     
     #search(input) for tag
     for i in range(len(p_list)):
-        # parents.append(p_list[i]['tag'])
+        # print('tag ins search', tag, p_list[i]['tag']) 
+        
         if p_list[i]['tag'] == tag:
             ergebnis.append( {'tag': p_list[i]["tag"], 'location_xml': location, 'possible_type': p_list[i]["possible_type"]} )
-            continue
+            
         if p_list[i]['children'] != None: 
-            ergebnis = search(p_list[i]["children"], tag, location, parents)
-        continue
+            ergebnis = search(p_list[i]["children"], tag, location, ergebnis)
+        
     return ergebnis
 
 
@@ -105,30 +95,20 @@ def read_tags(Ebene, len_lxml, parents = [], list_of_tags = []):
     for i in range(len(Ebene)):
 
         tag = Ebene[i].tag[len_lxml:]
-
-
-
         parents = parents[:] + [i]
         list_of_tags.append([tag, parents])
-        #('list_of_tags', list_of_tags)
+        print('list_of_tags', list_of_tags)
 
 
         #print(list_of_tags)
         if Ebene.getchildren()[i] != None:
-
-            #print(list_of_tags[-1][1])
-            #print('parents: ', parents)
+            list_of_tags[-1][1] = parents
+            #print('list of tags', list_of_tags)
+            print('parents: ', parents)
             read_tags(Ebene.getchildren()[i], len_lxml, parents, list_of_tags)
         #parents.pop(-1)
-        if Ebene[i].getparent() == root:
-            parents = []
-        else:
-            parents = [i]
-
-
-
-
-
+            #print(list_of_tags)
+        parents = [i]
 
     #list_of_tags[]
 
@@ -139,7 +119,7 @@ def read_tags(Ebene, len_lxml, parents = [], list_of_tags = []):
     return list_of_tags
     
     
-#%% 
+#%% p Lists
 #tags which dont contain dsgvo
 p00_tag_list = [""]
 
@@ -186,7 +166,7 @@ p100_tag_list = [
                                
                                ],
                            },
-                          {"tag": "ZweiNull",
+                          {"tag": "item",
                            "possible_type": ["Addresse"],
                            "children": [
                                {"tag": "Name1",
@@ -218,17 +198,9 @@ if __name__ == "__main__":
     
     example_xml = 'items.xml'
     root = read_xml(example_xml)
-    
-    # print(root.tag)
   
-    
-    # liste = read_tags(root)
-    
-    # pprint.pprint(liste)
-
     critical_tags_list = analyse_xml(root)
-    print(critical_tags_list)
-    # critical_tags_list = search(p100_tag_list,  "City", [1,8,8])
+    pprint.pprint('--------------------------')
+    pprint.pprint(critical_tags_list) 
     
-    # pprint.pprint(critical_tags_list)
   
