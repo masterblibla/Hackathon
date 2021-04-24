@@ -108,4 +108,6 @@ if __name__ == '__main__':
     root = le.parse(inf, parser).getroot()
     taginfo = parseFile(inf, outf)
     blackenTagText(taginfo)
+    
+    
 

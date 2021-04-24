@@ -18,6 +18,7 @@ def read_xml(path):
 def analyse_xml(root):
     
     
+    
     len_lxml = root.tag.rfind('}')+1
     
     tag_list = read_tags(root, len_lxml)
@@ -29,7 +30,8 @@ def analyse_xml(root):
     for tag in tag_list:
         critical_tag = search(p100_tag_list, tag[0], location = tag[1], ergebnis = [])
         if critical_tag != []:
-            critical_tags_list.append(critical_tag)
+            for item in critical_tag:
+                critical_tags_list.append(item)
             
         
     return critical_tags_list
@@ -159,7 +161,7 @@ p100_tag_list = [
                           {"tag": "EinsNull",
                            "possible_type": ["Addresse"],
                            "children": [
-                               {"tag": "Name1",
+                               {"tag": "NullNullNull",
                                 "possible_type": ["Name"],
                                 "children": None,},
                                {"tag": "Street",
@@ -188,9 +190,14 @@ if __name__ == "__main__":
     
     example_xml = 'items.xml'
     root = read_xml(example_xml)
-  
     critical_tags_list = analyse_xml(root)
+    
     pprint.pprint('--------------------------')
     pprint.pprint(critical_tags_list) 
+    
+    
+    # anonymized_xml = yvesfunktion(critical_tags_list)
+    
+    
     
   
