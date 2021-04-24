@@ -5,12 +5,12 @@ Created on Wed Apr 21 18:38:48 2021
 @author: andre
 """
 import pprint 
-import xml.etree.ElementTree as ET
-import xml.etree.ElementTree as le
+# import xml.etree.ElementTree as ET
+from lxml import etree as le
 
 def read_xml(path):
     
-    tree = ET.parse(path)
+    tree = le.parse(path)
     root = tree.getroot()
     
     return root
@@ -21,9 +21,9 @@ def analyse_xml(root):
     len_lxml = root.tag.rfind('}')+1
     
     tag_list = read_tags(root, len_lxml)
-    pprint.pprint(tag_list)
+    print("Ich bin die echte tag list", tag_list)
     
-    tag_list = [['item', [1,3,3,4,5]]]
+    
        
     critical_tags_list = []
     for tag in tag_list:
@@ -75,23 +75,39 @@ def search(p_list, tag, location, ergebnis = []):
         
 
         
-def read_tags(Ebene, len_lxml, parents = [], list_of_tags = []):
+# def read_tags(Ebene, len_lxml, parents = [], list_of_tags = []):
 
-    for i in range(len(Ebene)):
-        print(parents)
-        tag = Ebene[i].tag[len_lxml:]
-        parents = parents[:] + [i]
-        print('parents: ', parents)
-        list_of_tags.append([tag, parents])
-        print('list_of_tags', list_of_tags)
-        if Ebene.getchildren()[i] != None:
-            list_of_tags, parents = read_tags(Ebene.getchildren()[i], len_lxml, parents, list_of_tags)
+#     for i in range(len(Ebene)):
+#         print(parents)
+#         tag = Ebene[i].tag[len_lxml:]
+#         parents = parents[:] + [i]
+#         print('parents: ', parents)
+#         list_of_tags.append([tag, parents])
+#         print('list_of_tags', list_of_tags)
+#         if Ebene.getchildren()[i] != None:
+#             list_of_tags, parents = read_tags(Ebene.getchildren()[i], len_lxml, parents, list_of_tags)
        
     
-   #[['items', 0], ['item', 00], ['blub', 000], ['item', 0001], ['blub', 00010], ['deeperblub', 000100], ['seconditems', 1],
-    #['blubitem', 10]]
-    return list_of_tags, parents
+#    #[['items', 0], ['item', 00], ['blub', 000], ['item', 0001], ['blub', 00010], ['deeperblub', 000100], ['seconditems', 1],
+#     #['blubitem', 10]]
+#     return list_of_tags, parents
+
+def read_tags(Ebene, len_lxml, parents = [], list_of_tags = []):
+    for i in range(len(Ebene)): 
+        tag = Ebene[i].tag[len_lxml:]   
+        parents = parents[:] + [i]
+        list_of_tags.append([tag, parents])
+        #('list_of_tags', list_of_tags)        #print(list_of_tags)
+        if Ebene.getchildren()[i] != None:            #print(list_of_tags[-1][1])
+            #print('parents: ', parents)
+            read_tags(Ebene.getchildren()[i], len_lxml, parents, list_of_tags)
+        #parents.pop(-1)
+        if Ebene[i].getparent() == root:
+            parents = []
+        else:
+            parents = [i]    
     
+    return list_of_tags    
     
 #%% p Lists
 #tags which dont contain dsgvo
@@ -140,7 +156,7 @@ p100_tag_list = [
                                
                                ],
                            },
-                          {"tag": "item",
+                          {"tag": "EinsNull",
                            "possible_type": ["Addresse"],
                            "children": [
                                {"tag": "Name1",
