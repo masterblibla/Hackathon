@@ -25,6 +25,8 @@ def search(eintrag, testen, ergebnis = []):
           
       return ergebnis
         
+def search_document(eintrag, testen, ergebnis = []):
+    pass
 
 #%% 
 #tags which dont contain dsgvo
