@@ -69,30 +69,28 @@ def search(p_list, tag, location, ergebnis = [], parents = []):
 
 
         
-def search_document(eintrag, testen, ergebnis = []):
-    '''
-    searches document for all contained tags
 
-    Parameters
-    ----------
-    eintrag : TYPE
-        DESCRIPTION.
-    testen : TYPE
-        DESCRIPTION.
-    ergebnis : TYPE, optional
-        DESCRIPTION. The default is [].
-
-    Returns
-    -------
-    eintrag : list
-        contains all tags from xml-document.
-
-    '''
+        
+def read_tags(Ebene= root, list_of_tags = []):
+   for i in range(len(Ebene)):
+       list_of_tags.append[Ebene[i].tag()]
+                  
+       if Ebene.getchildren()[i] != None:
+           list_of_tags = read_tags(Ebene.getchildren()[i])
+                        
+   return list_of_tags
     
-    pass
 
+  
 
-
+ 
+    
+    
+    
+    
+    
+    
+    
 #%% 
 #tags which dont contain dsgvo
 p00_tag_list = [""]
