@@ -6,7 +6,7 @@ Created on Wed Apr 21 18:38:48 2021
 """
 import pprint 
 import xml.etree.ElementTree as ET
-from lxml import etree
+import xml.etree.ElementTree as le
 
 def read_xml(path):
     
@@ -23,11 +23,10 @@ def analyse_xml(root):
     tag_list = read_tags(root, len_lxml)
     pprint.pprint(tag_list)
     
-   
+    tag_list = [['item', [1,3,3,4,5]]]
        
     critical_tags_list = []
     for tag in tag_list:
-        print(tag[0])
         critical_tag = search(p100_tag_list, tag[0], location = tag[1], ergebnis = [])
         if critical_tag != []:
             critical_tags_list.append(critical_tag)
@@ -76,47 +75,22 @@ def search(p_list, tag, location, ergebnis = []):
         
 
         
-# def read_tags(Ebene, len_lxml, parents = [], list_of_tags = [] ):
-#    for i in range(len(Ebene)):
-       
-#        list_of_tags.append([Ebene[i].tag[len_lxml:], parents])
-#        parents.append(Ebene[i].tag[len_lxml:]) 
-#        #print(parents)
-#        if Ebene.getchildren()[i] != None:
-#            list_of_tags = read_tags(Ebene.getchildren()[i], len_lxml, [parents])
-         
-         # parents.append(Ebene[i].tag[len_lxml:])   
-#        parents = []    
-#    return list_of_tags
-    
-
 def read_tags(Ebene, len_lxml, parents = [], list_of_tags = []):
 
     for i in range(len(Ebene)):
-
+        print(parents)
         tag = Ebene[i].tag[len_lxml:]
         parents = parents[:] + [i]
+        print('parents: ', parents)
         list_of_tags.append([tag, parents])
         print('list_of_tags', list_of_tags)
-
-
-        #print(list_of_tags)
         if Ebene.getchildren()[i] != None:
-            list_of_tags[-1][1] = parents
-            #print('list of tags', list_of_tags)
-            print('parents: ', parents)
-            read_tags(Ebene.getchildren()[i], len_lxml, parents, list_of_tags)
-        #parents.pop(-1)
-            #print(list_of_tags)
-        parents = [i]
-
-    #list_of_tags[]
-
-    #print(list_of_tags)
-
+            list_of_tags, parents = read_tags(Ebene.getchildren()[i], len_lxml, parents, list_of_tags)
+       
+    
    #[['items', 0], ['item', 00], ['blub', 000], ['item', 0001], ['blub', 00010], ['deeperblub', 000100], ['seconditems', 1],
     #['blubitem', 10]]
-    return list_of_tags
+    return list_of_tags, parents
     
     
 #%% p Lists
