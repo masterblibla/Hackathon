@@ -25,11 +25,29 @@ def search(eintrag, testen, ergebnis = []):
           
       return ergebnis
         
-def search_document(eintrag, testen, ergebnis = []):
-    pass
 
-#hallo André
 
+        
+def read_tags(Ebene= root, list_of_tags = []):
+   for i in range(len(Ebene)):
+       list_of_tags.append[Ebene[i].tag()]
+                  
+       if Ebene.getchildren()[i] != None:
+           list_of_tags = read_tags(Ebene.getchildren()[i])
+                        
+   return list_of_tags
+    
+
+  
+
+ 
+    
+    
+    
+    
+    
+    
+    
 #%% 
 #tags which dont contain dsgvo
 p00_tag_list = [""]
