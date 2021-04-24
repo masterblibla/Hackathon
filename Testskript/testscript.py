@@ -6,11 +6,11 @@ Created on Wed Apr 21 18:38:48 2021
 """
 import pprint 
 import xml.etree.ElementTree as ET
-from lxml import etree
+from lxml import etree as le
 
 def read_xml(path):
     
-    tree = ET.parse(path)
+    tree = le.parse(path)
     root = tree.getroot()
     
     
@@ -31,6 +31,7 @@ def analyse_xml(root):
     len_lxml = root.tag.rfind('}')+1
     
     tag_list = read_tags(root, len_lxml)
+    print('tag_list: ', tag_list)
     
 
     
@@ -109,18 +110,20 @@ def read_tags(Ebene, len_lxml, parents = [], list_of_tags = []):
 
         parents = parents[:] + [i]
         list_of_tags.append([tag, parents])
-        print('list_of_tags', list_of_tags)
+        #('list_of_tags', list_of_tags)
 
 
         #print(list_of_tags)
         if Ebene.getchildren()[i] != None:
-            list_of_tags[-1][1] = parents
-            #print('list of tags', list_of_tags)
-            print('parents: ', parents)
+
+            #print(list_of_tags[-1][1])
+            #print('parents: ', parents)
             read_tags(Ebene.getchildren()[i], len_lxml, parents, list_of_tags)
         #parents.pop(-1)
-            #print(list_of_tags)
-        parents = [i]
+        if Ebene[i].getparent() == root:
+            parents = []
+        else:
+            parents = [i]
 
 
 
@@ -183,7 +186,7 @@ p100_tag_list = [
                                
                                ],
                            },
-                          {"tag": "items",
+                          {"tag": "ZweiNull",
                            "possible_type": ["Addresse"],
                            "children": [
                                {"tag": "Name1",
@@ -222,8 +225,9 @@ if __name__ == "__main__":
     # liste = read_tags(root)
     
     # pprint.pprint(liste)
+
     critical_tags_list = analyse_xml(root)
-    #pprint.pprint(critical_tags_list)
+    print(critical_tags_list)
     # critical_tags_list = search(p100_tag_list,  "City", [1,8,8])
     
     # pprint.pprint(critical_tags_list)

@@ -1,12 +1,11 @@
 <data>
-    <items>
-        <item name="item1">item1abc<blub>blub1</blub>
-        </item>
-        <item name="item2">item2abc<blub>blub2<deeperblub>deepblub1</deeperblub>
-            </blub>
-        </item>
-    </items>
-    <seconditems>
+    <Null>
+        <NullNull>item1abc<NullNullNull>blub1</NullNullNull>
+        </NullNull>
+        <NullEins>item2abc<NullEinsNull>blub2<NullEinsNullNull>deepblub1</NullEinsNullNull></NullEinsNull>
+        </NullEins>
+    </Null>
+    <Eins>
         <blubitem>item1abc</blubitem>
-    </seconditems>
+    </Eins>
 </data>
