@@ -40,8 +40,6 @@ def analyse_xml(root):
     critical_tags_list = []
     
     for tag in tag_list:
-       
-    
         critical_tag = search(p100_tag_list, tag[0], location = tag[1])
         
         critical_tags_list.append(critical_tag)
@@ -101,16 +99,41 @@ def search(p_list, tag, location, ergebnis = [], parents = []):
 #    return list_of_tags
     
 
-def read_tags(Ebene, len_lxml, parents = [], list_of_tags = [] ):
-   for i in range(len(Ebene)):
-       
-       list_of_tags.append([Ebene[i].tag[len_lxml:], parents])
-       
-       if Ebene.getchildren()[i] != None:
-           list_of_tags = read_tags(Ebene.getchildren()[i], len_lxml, parents)
-       parents.append(i) 
-           
-   return list_of_tags
+def read_tags(Ebene, len_lxml, parents = [], list_of_tags = []):
+
+    for i in range(len(Ebene)):
+
+        tag = Ebene[i].tag[len_lxml:]
+
+
+
+        parents = parents[:] + [i]
+        list_of_tags.append([tag, parents])
+        print('list_of_tags', list_of_tags)
+
+
+        #print(list_of_tags)
+        if Ebene.getchildren()[i] != None:
+            list_of_tags[-1][1] = parents
+            #print('list of tags', list_of_tags)
+            print('parents: ', parents)
+            read_tags(Ebene.getchildren()[i], len_lxml, parents, list_of_tags)
+        #parents.pop(-1)
+            #print(list_of_tags)
+        parents = [i]
+
+
+
+
+
+
+    #list_of_tags[]
+
+    #print(list_of_tags)
+
+   #[['items', 0], ['item', 00], ['blub', 000], ['item', 0001], ['blub', 00010], ['deeperblub', 000100], ['seconditems', 1],
+    #['blubitem', 10]]
+    return list_of_tags
     
     
 #%% 
@@ -200,7 +223,7 @@ if __name__ == "__main__":
     
     # pprint.pprint(liste)
     critical_tags_list = analyse_xml(root)
-    pprint.pprint(critical_tags_list)
+    #pprint.pprint(critical_tags_list)
     # critical_tags_list = search(p100_tag_list,  "City", [1,8,8])
     
     # pprint.pprint(critical_tags_list)
