@@ -61,7 +61,7 @@ def search(p_list, tag, location, ergebnis = []):
     
     #search(input) for tag
     for i in range(len(p_list)):
-        print('tag ins search', tag, p_list[i]['tag']) 
+        # print('tag ins search', tag, p_list[i]['tag']) 
         
         if p_list[i]['tag'] == tag:
             ergebnis.append( {'tag': p_list[i]["tag"], 'location_xml': location, 'possible_type': p_list[i]["possible_type"]} )
@@ -95,9 +95,6 @@ def read_tags(Ebene, len_lxml, parents = [], list_of_tags = []):
     for i in range(len(Ebene)):
 
         tag = Ebene[i].tag[len_lxml:]
-
-
-
         parents = parents[:] + [i]
         list_of_tags.append([tag, parents])
         print('list_of_tags', list_of_tags)
@@ -112,11 +109,6 @@ def read_tags(Ebene, len_lxml, parents = [], list_of_tags = []):
         #parents.pop(-1)
             #print(list_of_tags)
         parents = [i]
-
-
-
-
-
 
     #list_of_tags[]
 
