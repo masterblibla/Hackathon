@@ -1,5 +1,3 @@
-import sys, os
-import xml.etree.ElementTree as ET
 import lxml.etree as le
 
 #path = 'C:\\Users\\YvesGeib\\GAEB\\Hochbau\\GAEB DA XML'
@@ -7,7 +5,6 @@ import lxml.etree as le
 #filename = '0131.X84'
 #tree = ET.parse(os.path.join(path, filename))
 #root = tree.getroot()
-# get criticaltags, type of criticaltag (name, address)
 
 
 
@@ -15,22 +12,12 @@ import lxml.etree as le
 get criticaltags with location
 jump to criticaltags in document
 replace current criticaltag with anonymous tag (blacken or "Musterstrasse")
-"""
 
-"""
 example dictionary:
 [{'tag': "City", 'location': [0,1,8], 'type': [pos_type1, pos_type2]},
  {'tag': "City", 'location': [0,1,8], 'type': [pos_type1, pos_type2]},
  {'tag': "City", 'location': [0,1,8], 'type': [pos_type1, pos_type2]}]
 """
-
-#parser (und auch bei doc) muss vorher blank text entfernen, damit pretty_print funktioniert
-
-
-#criticaltag = 'item'
-#taglocation = root[0][0]
-
-
 
 """
 gets an XML file and produces a dictionary containing information about the tag
@@ -40,7 +27,6 @@ gets an XML file and produces a dictionary containing information about the tag
 @rtype: dict
 @returns: a dictionary with three elements {'tag', 'location', 'tagtype'}
 """
-
 def parseFile(inf, outf):
     parser = le.XMLParser(remove_blank_text=True)
 
@@ -65,16 +51,34 @@ gets a taginfo dictionary and anonymizes the contained text (refactors by blacke
 """
 def blackenTagText(location):
 
-    #get number of elements in location list and translate it into full location
+    # testfiles
+    inf = 'items.xml'
+    outf = 'testOut.xml'
 
-    locationlist = taginfo['location']
-    location = recursefunc(root, locationlist)
-    #root[0][1]
-    #failsafe whether tag is correct and really exists at this point
-    if taginfo['tag'] != location.tag:
-        raise Exception("The tags don't match, anonymizing stopped. Please restart application.")
-    else:
-        print(location.text)
+    # get number of elements in location list and translate it into full location
+    parser = le.XMLParser(remove_blank_text=True)
+
+
+    with open(outf, 'wb') as outfile, open(inf,'r') as infile:
+
+        root = le.parse(infile, parser).getroot()
+
+        # Process input dict and get the location element
+        locationlist = taginfo['location']
+        location = recursefunc(root, locationlist)
+
+        # failsafe if tag is correct and really exists at this point
+        if taginfo['tag'] != location.tag:
+            raise Exception("The tags don't match, anonymizing stopped. Please restart application.")
+        else:
+            location.text = 'newe'
+            print(location.text)
+
+        out = le.tostring(root, encoding='UTF-8', xml_declaration=True, pretty_print=True)
+        outfile.write(out)
+
+
+
 
 """
 takes a root and a list of numbers and returns the location of the tag at those children

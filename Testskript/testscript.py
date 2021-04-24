@@ -90,16 +90,41 @@ def search(p_list, tag, location, ergebnis = []):
 #    return list_of_tags
     
 
-def read_tags(Ebene, len_lxml, parents = [], list_of_tags = [] ):
-   for i in range(len(Ebene)):
-       
-       list_of_tags.append([Ebene[i].tag[len_lxml:], parents])
-       
-       if Ebene.getchildren()[i] != None:
-           list_of_tags = read_tags(Ebene.getchildren()[i], len_lxml, parents)
-       parents.append(i) 
-           
-   return list_of_tags
+def read_tags(Ebene, len_lxml, parents = [], list_of_tags = []):
+
+    for i in range(len(Ebene)):
+
+        tag = Ebene[i].tag[len_lxml:]
+
+
+
+        parents = parents[:] + [i]
+        list_of_tags.append([tag, parents])
+        print('list_of_tags', list_of_tags)
+
+
+        #print(list_of_tags)
+        if Ebene.getchildren()[i] != None:
+            list_of_tags[-1][1] = parents
+            #print('list of tags', list_of_tags)
+            print('parents: ', parents)
+            read_tags(Ebene.getchildren()[i], len_lxml, parents, list_of_tags)
+        #parents.pop(-1)
+            #print(list_of_tags)
+        parents = [i]
+
+
+
+
+
+
+    #list_of_tags[]
+
+    #print(list_of_tags)
+
+   #[['items', 0], ['item', 00], ['blub', 000], ['item', 0001], ['blub', 00010], ['deeperblub', 000100], ['seconditems', 1],
+    #['blubitem', 10]]
+    return list_of_tags
     
     
 #%% p Lists
