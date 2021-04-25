@@ -1,11 +1,11 @@
 <data>
     <Null>
-        <NullNull>item1abc<NullNullNull>blub1</NullNullNull>
+        <NullNull>item1abc<NullNullNull></NullNullNull>
         </NullNull>
         <NullEins>item2abc<NullEinsNull>blub2<NullEinsNullNull>deepblub1</NullEinsNullNull></NullEinsNull>
         </NullEins>
     </Null>
     <Eins>
-        <EinsNull>item123</EinsNull>
+        <EinsNull>itemabds</EinsNull>
     </Eins>
 </data>

@@ -9,7 +9,6 @@ import pprint
 from lxml import etree as le
 
 def read_xml(path):
-    
     tree = le.parse(path)
     root = tree.getroot()
     
@@ -22,7 +21,7 @@ def analyse_xml(root):
     len_lxml = root.tag.rfind('}')+1
     
     tag_list = read_tags(root, root, len_lxml)
-    print("Ich bin die echte tag list", tag_list)
+    #print("Ich bin die echte tag list", tag_list)
     
     
        
@@ -55,7 +54,7 @@ def search(p_list, tag, location, ergebnis = []):
     ergebnis : list
         contains all matched critical tags and posssible data-types.
 
-    Acces
+    Access
     -------
     ergebnis = [['tag',[possible_type1, possible_type2]]]
     '''
@@ -107,7 +106,7 @@ def read_tags(root, Ebene, len_lxml, parents = [], list_of_tags = []):
         if Ebene[i].getparent() == root:
             parents = []
         else:
-            parents = [i]    
+            parents = [i]
     
     return list_of_tags    
     
@@ -121,13 +120,13 @@ p50_tag_list = [
                  "possible_type": None,
                  "children": [
                      {"tag": "NamePrj",
-                      "possible_type": ["Firmename"],
+                      "possible_type": ["Firmenname"],
                       "children": None,},
                      {"tag": "LblPrj",
                       "possible_type": ["Firmenname"],
                       "children": None,},
                      {"tag": "Descrip",
-                      "possible_type": ["Firmename"],
+                      "possible_type": ["Firmenname"],
                       "children": None,},
                                 ],
                     },]
@@ -141,7 +140,7 @@ p100_tag_list = [
                       "possible_type": ["Firmenname"],
                       "children": [
                           {"tag": "Address",
-                           "possible_type": ["Addresse"],
+                           "possible_type": ["Adresse"],
                            "children": [
                                {"tag": "Name1",
                                 "possible_type": ["Name"],
@@ -155,27 +154,27 @@ p100_tag_list = [
                                {"tag": "City",
                                 "possible_type": ["Stadt"],
                                 "children": None,},
-                               
+
                                ],
                            },
-                          {"tag": "EinsNull",
-                           "possible_type": ["Addresse"],
-                           "children": [
-                               {"tag": "NullNullNull",
-                                "possible_type": ["Name"],
-                                "children": None,},
-                               {"tag": "Street",
-                                "possible_type": ["Straße"],
-                                "children": None,},
-                               {"tag": "PCode",
-                                "possible_type": ["Postleitzahl"],
-                                "children": None,},
-                               {"tag": "City",
-                                "possible_type": ["Gebäudename"],
-                                "children": None,},
-                               
-                               ],
-                           },],
+                  {"tag": "Address",
+                   "possible_type": ["Adresse"],
+                   "children": [
+                       {"tag": "Name2",
+                        "possible_type": ["Name"],
+                        "children": None,},
+                       {"tag": "DP",
+                        "possible_type": None,
+                        "children": None,},
+                       {"tag": "PCode",
+                        "possible_type": ["Postleitzahl"],
+                        "children": None,},
+                       {"tag": "City",
+                        "possible_type": ["Stadt", "Ort"],
+                        "children": None,},
+
+                       ],
+                   },],
                       },],
                  },]
 
@@ -185,7 +184,7 @@ p100_tag_list = [
 #     "children": [...]
 #     }
 #%%
-
+"""
 if __name__ == "__main__":
     
     example_xml = 'items.xml'
@@ -197,7 +196,7 @@ if __name__ == "__main__":
     
     
     # anonymized_xml = yvesfunktion(critical_tags_list)
-    
+    """
     
     
   

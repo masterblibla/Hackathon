@@ -1,23 +1,89 @@
-23:45:37,984 anonymizingLogger INFO ('Current location starting from root going through the children', [0, 0, 0])
-23:45:37,984 anonymizingLogger INFO changed current text "blub1" of tag NullNullNull
-23:45:37,984 anonymizingLogger INFO into "anonymized text"
-23:45:37,984 anonymizingLogger INFO Anonymizing for tag NullNullNull completed.
+14:16:29,540 AnonLogger INFO ('Current location starting from root going through the children', [2])
+14:16:29,540 AnonLogger INFO This element does not contain text. Anonymization skipped.
 
-23:45:37,984 anonymizingLogger INFO ('Current location starting from root going through the children', [1, 0])
-23:47:21,817 anonymizingLogger INFO ('Current location starting from root going through the children', [0, 0, 0])
-23:47:21,817 anonymizingLogger INFO changed current text "blub1" of tag NullNullNull
-23:47:21,817 anonymizingLogger INFO into "anonymized text"
-23:47:21,817 anonymizingLogger INFO Anonymizing for tag NullNullNull completed.
+14:16:29,540 AnonLogger INFO ('Current location starting from root going through the children', [2, 0])
+14:16:29,540 AnonLogger INFO changed current text "Lutz Meister" of tag Name1
+14:16:29,540 AnonLogger INFO into "Mustermann/Musterfrau"
+14:16:29,540 AnonLogger INFO Anonymizing for tag Name1 completed.
 
-23:47:21,817 anonymizingLogger INFO ('Current location starting from root going through the children', [1, 0])
-23:47:21,817 anonymizingLogger INFO This tag does not contain text.
-23:47:58,884 anonymizingLogger INFO ('Current location starting from root going through the children', [0, 0, 0])
-23:47:58,884 anonymizingLogger INFO changed current text "blub1" of tag NullNullNull
-23:47:58,884 anonymizingLogger INFO into "anonymized text"
-23:47:58,884 anonymizingLogger INFO Anonymizing for tag NullNullNull completed.
+14:16:29,540 AnonLogger INFO ('Current location starting from root going through the children', [3])
+14:16:29,540 AnonLogger INFO This element does not contain text. Anonymization skipped.
 
-23:47:58,884 anonymizingLogger INFO ('Current location starting from root going through the children', [1, 0])
-23:47:58,884 anonymizingLogger INFO changed current text "item123" of tag EinsNull
-23:47:58,884 anonymizingLogger INFO into "anonymized text"
-23:47:58,884 anonymizingLogger INFO Anonymizing for tag EinsNull completed.
+14:17:28,532 AnonLogger INFO ('Current location starting from root going through the children', [2])
+14:17:28,532 AnonLogger INFO This element does not contain text. Anonymization skipped.
+
+14:17:28,532 AnonLogger INFO ('Current location starting from root going through the children', [2, 0])
+14:17:28,532 AnonLogger INFO changed current text "Lutz Meister" of tag Name1
+14:17:28,532 AnonLogger INFO into "Mustermann/Musterfrau"
+14:17:28,532 AnonLogger INFO Anonymizing for tag Name1 completed.
+
+14:17:28,532 AnonLogger INFO ('Current location starting from root going through the children', [3])
+14:17:28,532 AnonLogger INFO This element does not contain text. Anonymization skipped.
+
+14:17:28,532 AnonLogger INFO ('Current location starting from root going through the children', [3, 0])
+14:17:28,532 AnonLogger INFO changed current text "82" of tag DP
+14:17:28,532 AnonLogger INFO into "XXXX"
+14:18:24,842 AnonLogger INFO ('Current location starting from root going through the children', [2])
+14:18:24,842 AnonLogger INFO This element does not contain text. Anonymization skipped.
+
+14:18:24,842 AnonLogger INFO ('Current location starting from root going through the children', [2, 0])
+14:18:24,842 AnonLogger INFO changed current text "Lutz Meister" of tag Name1
+14:18:24,842 AnonLogger INFO into "Mustermann/Musterfrau"
+14:18:24,842 AnonLogger INFO Anonymizing for tag Name1 completed.
+
+14:18:24,842 AnonLogger INFO ('Current location starting from root going through the children', [3])
+14:18:24,842 AnonLogger INFO This element does not contain text. Anonymization skipped.
+
+14:18:24,842 AnonLogger INFO ('Current location starting from root going through the children', [3, 0])
+14:18:24,842 AnonLogger INFO changed current text "82" of tag DP
+14:18:24,842 AnonLogger INFO into "XXXX"
+14:18:24,842 AnonLogger INFO Anonymizing for tag DP completed.
+
+14:36:25,363 AnonLogger INFO ('Current location starting from root going through the children', [2])
+14:36:25,363 AnonLogger INFO This element does not contain text. Anonymization skipped.
+
+14:36:25,363 AnonLogger INFO ('Current location starting from root going through the children', [2, 0])
+14:36:25,363 AnonLogger INFO changed current text "Lutz Meister" of tag Name1
+14:36:25,363 AnonLogger INFO into "Mustermann/Musterfrau"
+14:36:25,363 AnonLogger INFO Anonymizing for tag Name1 completed.
+
+14:36:25,363 AnonLogger INFO ('Current location starting from root going through the children', [3])
+14:36:25,363 AnonLogger INFO This element does not contain text. Anonymization skipped.
+
+14:36:25,363 AnonLogger INFO ('Current location starting from root going through the children', [3, 0])
+14:36:25,363 AnonLogger INFO changed current text "82" of tag DP
+14:36:25,363 AnonLogger INFO into "XXXX"
+14:36:25,363 AnonLogger INFO Anonymizing for tag DP completed.
+
+14:38:30,744 AnonLogger INFO ('Current location starting from root going through the children', [2])
+14:38:30,744 AnonLogger INFO This element does not contain text. Anonymization skipped.
+
+14:38:30,744 AnonLogger INFO ('Current location starting from root going through the children', [2, 0])
+14:38:30,744 AnonLogger INFO changed current text "Lutz Meister" of tag Name1
+14:38:30,744 AnonLogger INFO into "Mustermann/Musterfrau"
+14:38:30,744 AnonLogger INFO Anonymizing for tag Name1 completed.
+
+14:38:30,744 AnonLogger INFO ('Current location starting from root going through the children', [3])
+14:38:30,744 AnonLogger INFO This element does not contain text. Anonymization skipped.
+
+14:38:30,744 AnonLogger INFO ('Current location starting from root going through the children', [3, 0])
+14:38:30,744 AnonLogger INFO changed current text "82" of tag DP
+14:38:30,744 AnonLogger INFO into "XXXX"
+14:38:30,744 AnonLogger INFO Anonymizing for tag DP completed.
+
+14:41:31,101 AnonLogger INFO ('Current location starting from root going through the children', [2])
+14:41:31,109 AnonLogger INFO This element does not contain text. Anonymization skipped.
+
+14:41:31,109 AnonLogger INFO ('Current location starting from root going through the children', [2, 0])
+14:41:31,109 AnonLogger INFO changed current text "Lutz Meister" of tag Name1
+14:41:31,109 AnonLogger INFO into "Mustermann/Musterfrau"
+14:41:31,109 AnonLogger INFO Anonymizing for tag Name1 completed.
+
+14:41:31,109 AnonLogger INFO ('Current location starting from root going through the children', [3])
+14:41:31,109 AnonLogger INFO This element does not contain text. Anonymization skipped.
+
+14:41:31,109 AnonLogger INFO ('Current location starting from root going through the children', [3, 0])
+14:41:31,109 AnonLogger INFO changed current text "82" of tag DP
+14:41:31,109 AnonLogger INFO into "XXXX"
+14:41:31,109 AnonLogger INFO Anonymizing for tag DP completed.
 

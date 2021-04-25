@@ -2,6 +2,7 @@ import pprint
 import lxml.etree as le
 import tag_script as ts
 import logging
+import os
 
 #path = 'C:\\Users\\YvesGeib\\GAEB\\Hochbau\\GAEB DA XML'
 #path = os.getcwd()
@@ -18,7 +19,7 @@ logging.basicConfig(filename=logfile,
 
 
 
-logger = logging.getLogger('anonymizingLogger')
+logger = logging.getLogger('AnonLogger')
 
 
 """
@@ -62,9 +63,11 @@ gets a list of taginfo dictionaries and anonymizes the contained text (refactors
 @param taginfo: a dictionary with three elements {'tag', 'location', 'tagtype'}
 @returns: an XML file with redacted content
 """
-def blackenTagText(critical_tags_list, root):
+def blackenTagText(critical_tags_list, root, path):
     # One print to rule them all
     print('critical_tags_list: ', critical_tags_list)
+    # Omit unnecessary content like https
+    len_lxml = root.tag.rfind('}') + 1
 
     # Loop over the critical tags and anonymize each one
     for elem in critical_tags_list:
@@ -74,27 +77,66 @@ def blackenTagText(critical_tags_list, root):
         # Process input dict and get the location element in current xml document
         # WARNING: location content gets deleted during recursefunc
         location = recursefunc(root, elem['location_xml'])
-
-        # failsafe if tag is correct and really exists at this point
-        if elem['tag'] != location.tag:
-            logger.info('The tags don\'t match, anonymizing stopped.')
-            raise Exception('The tags don\'t match, anonymizing stopped. Please restart application.')
-        # Another failsafe if tag contains text
+        #location =
+        print('location:', location.tag[len_lxml:])
+        print(elem['tag'])
+        # failsafe if tag is not correct and does not exist at this point
+        if elem['tag'] != location.tag[len_lxml:]:
+            logger.info('The tags don\'t match, anonymization stopped.\n')
+            raise Exception('The tags don\'t match, anonymization stopped. Please restart application.')
+        # Another failsafe if tag does not contain text
         elif location.text == None:
-            logger.info('This element does not contain text.')
-            raise Exception('This element does not contain text.')
+            location.text = ''
+            logger.info('This element does not contain text. Anonymization skipped.\n')
+            #continue
+            #raise Exception('This element does not contain text.')
+
         # Replace private text content with anonymized text
         else:
-            logger.info('changed current text \"' + location.text + '\" of tag ' + location.tag)
-            location.text = 'anonymized text'
+            print('elem: ', elem)
+            if elem['possible_type'] == None:
+                logger.info('changed current text \"' + location.text + '\" of tag ' + location.tag[len_lxml:])
+                location.text = 'XXXX'
+                logger.info('into \"' + location.text + '\"')
+            elif 'Name' in elem['possible_type']:
+                logger.info('changed current text \"' + location.text + '\" of tag ' + location.tag[len_lxml:])
+                location.text = 'Mustermann/Musterfrau'
+                logger.info('into \"' + location.text + '\"')
+            elif 'Straße' in elem['possible_type']:
+                logger.info('changed current text \"' + location.text + '\" of tag ' + location.tag[len_lxml:])
+                location.text = 'Musterstraße'
+                logger.info('into \"' + location.text + '\"')
+            elif 'Postleitzahl' in elem['possible_type']:
+                logger.info('changed current text \"' + location.text + '\" of tag ' + location.tag[len_lxml:])
+                location.text = '65432'
+                logger.info('into \"' + location.text + '\"')
+            elif 'Stadt' in elem['possible_type']:
+                logger.info('changed current text \"' + location.text + '\" of tag ' + location.tag[len_lxml:])
+                location.text = 'Musterstadt'
+                logger.info('into \"' + location.text + '\"')
+            elif 'Adresse' in elem['possible_type']:
+                logger.info('changed current text \"' + location.text + '\" of tag ' + location.tag[len_lxml:])
+                location.text = 'Musteradresse'
+                logger.info('into \"' + location.text + '\"')
+            """
+            logger.info('changed current text \"' + location.text + '\" of tag ' + location.tag[len_lxml:])
+            location.text = 'Musteradresse'
             logger.info('into \"' + location.text + '\"')
-            logger.info('Anonymizing for tag ' + location.tag + ' completed.\n')
+            """
+            logger.info('Anonymizing for tag ' + location.tag[len_lxml:] + ' completed.\n')
 
+    # Get extension of input file
 
-    # Output of xml to new file testOut.xml
-    outf = 'testOut.xml'
+    # Output of xml to new file. Filename added with _Anon
+    #for fp in path:
+        #filename = os.path.splitext(fp)[0]
+        #ext = os.path.splitext(fp)[-1]
+        #outf = fp + '_Anon' + ext
+
+    outf = 'ANON_' + path
+    print(outf)
     with open(outf, 'wb') as outfile:
-        out = le.tostring(root, encoding='UTF-8', xml_declaration=False, pretty_print=True)
+        out = le.tostring(root, encoding='UTF-8', xml_declaration=True, pretty_print=True)
         outfile.write(out)
 
 
@@ -117,19 +159,22 @@ def recursefunc(root, location):
     if location != []:
         rootNew = recursefunc(rootNew, location)
 
+
     return rootNew
 
 
 
 if __name__ == '__main__':
 
+    # TODO: path = list of files
+    path = '271_Test.X82'
     example_xml = 'items.xml'
-    root = ts.read_xml(example_xml)
+    root = ts.read_xml(path)
     critical_tags_list = ts.analyse_xml(root)
     pprint.pprint('--------------------------')
     pprint.pprint(critical_tags_list)
 
-    blackenTagText(critical_tags_list, root)
+    blackenTagText(critical_tags_list, root, path)
     #parser = le.XMLParser(remove_blank_text=True)
     #root = le.parse(inf, parser).getroot()
     #taginfo = parseFile(inf, outf)

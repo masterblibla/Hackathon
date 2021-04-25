@@ -1,7 +1,7 @@
 import lxml.etree as le
 
 inf = 'items.xml'
-outf = 'testOut.xml'
+outf = 'testOut.X82'
 
 #parser (und auch bei doc) muss vorher blank text entfernen, damit pretty_print funktioniert
 parser = le.XMLParser(remove_blank_text=True)
