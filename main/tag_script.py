@@ -9,13 +9,40 @@ import pprint
 from lxml import etree as le
 
 def read_xml(path):
+    '''
+    reads the given path into machine code
+
+    Parameters
+    ----------
+    path : string
+        path of geab data.
+
+    Returns
+    -------
+    root : object
+        root of given geab-data.
+
+    '''
     tree = le.parse(path)
     root = tree.getroot()
     
     return root
 
 def analyse_xml(root):
-    
+    '''
+    analyse the given geab-data for critical tags, which are specified by p_lists
+
+    Parameters
+    ----------
+    root : object
+        root of current geab-data.
+
+    Returns
+    -------
+    critical_tags_list : list
+        contains all critical elements identified in the given geab-data.
+
+    '''
     
     
     len_lxml = root.tag.rfind('}')+1
@@ -71,29 +98,31 @@ def search(p_list, tag, location, ergebnis = []):
         
     return ergebnis
 
-
-
-        
-
-        
-# def read_tags(Ebene, len_lxml, parents = [], list_of_tags = []):
-
-#     for i in range(len(Ebene)):
-#         print(parents)
-#         tag = Ebene[i].tag[len_lxml:]
-#         parents = parents[:] + [i]
-#         print('parents: ', parents)
-#         list_of_tags.append([tag, parents])
-#         print('list_of_tags', list_of_tags)
-#         if Ebene.getchildren()[i] != None:
-#             list_of_tags, parents = read_tags(Ebene.getchildren()[i], len_lxml, parents, list_of_tags)
-       
-    
-#    #[['items', 0], ['item', 00], ['blub', 000], ['item', 0001], ['blub', 00010], ['deeperblub', 000100], ['seconditems', 1],
-#     #['blubitem', 10]]
-#     return list_of_tags, parents
+   
 
 def read_tags(root, Ebene, len_lxml, parents = [], list_of_tags = []):
+    '''
+    in depth search of given geab data 
+
+    Parameters
+    ----------
+    root : object
+        DESCRIPTION.
+    Ebene : object
+        current level of depth analysis.
+    len_lxml : int
+        length of requested lxml key.
+    parents : list, optional
+        contains all parents of the current Ebene. The default is [].
+    list_of_tags : list, optional
+        contains all information abaut tags, such as name, position. The default is [].
+
+    Returns
+    -------
+    list_of_tags : list
+        contains all information abaut tags, such as name, position.
+
+    '''
     for i in range(len(Ebene)): 
         tag = Ebene[i].tag[len_lxml:]   
         parents = parents[:] + [i]
@@ -111,6 +140,7 @@ def read_tags(root, Ebene, len_lxml, parents = [], list_of_tags = []):
     return list_of_tags    
     
 #%% p Lists
+
 #tags which dont contain dsgvo
 p00_tag_list = [""]
 
@@ -157,34 +187,18 @@ p100_tag_list = [
 
                                ],
                            },
-                  {"tag": "Address",
-                   "possible_type": ["Adresse"],
-                   "children": [
-                       {"tag": "Name2",
-                        "possible_type": ["Name"],
-                        "children": None,},
-                       {"tag": "DP",
-                        "possible_type": None,
-                        "children": None,},
-                       {"tag": "PCode",
-                        "possible_type": ["Postleitzahl"],
-                        "children": None,},
-                       {"tag": "City",
-                        "possible_type": ["Stadt", "Ort"],
-                        "children": None,},
-
-                       ],
-                   },],
+                  ],
                       },],
                  },]
 
+#example of p_list entry
 # eg_dict_safe_list = {
 #     "tag": "LblPrj",
 #     "possible_type": "firma",
 #     "children": [...]
 #     }
 #%%
-"""
+
 if __name__ == "__main__":
     
     example_xml = 'items.xml'
@@ -193,10 +207,6 @@ if __name__ == "__main__":
     
     pprint.pprint('--------------------------')
     pprint.pprint(critical_tags_list)
-    
-    
-    # anonymized_xml = yvesfunktion(critical_tags_list)
-    """
     
     
   
